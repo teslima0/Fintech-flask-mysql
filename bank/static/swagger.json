@@ -1,0 +1,510 @@
+{
+  "openapi": "3.0.0",
+  "info":{
+      "description": "Code with Tamar",
+      "Version": "1.0.0",
+      "title":"Code with Tamar Flask API tutorial",
+      "license": {
+          "name": "MIT",
+          "url": "https://opensource.org/licenses/MIT"
+      }
+
+
+  },
+
+  "tags": [
+      {
+        "name": "Products API",
+        "description": "Test API"
+      }
+    ],
+
+    "servers": [
+      {
+      "url": "/"
+      }
+  ],
+  
+  "components": {
+      "schemas": {
+          "Registration": {
+              "type": "object",
+              "properties": {
+                  "fullname": {
+                  "type": "string"
+                  },
+                  "email": {
+                  "type": "string"
+                  },
+                    
+                  "password": {
+                  "type": "string"
+                  },
+                  
+                  "confirm_password": {
+                    "type": "string"
+                    },
+                    "transaction_pin": {
+                    "type": "string"
+                    },
+                    "confirm_pin": {
+                    "type": "string"
+                    }
+              }
+          },
+          "Login": {
+            "type": "object",
+            "properties": {
+                
+                "email": {
+                "type": "string"
+                },
+                "password": {
+                "type": "string"
+                }
+                        
+            }
+        },
+       
+        
+          "Balance": {
+            "type": "object",
+            "properties": {
+                "user":{
+                "type": "string"
+                }   
+            }
+        },
+
+        
+        "Deposite": {
+            "type": "object",
+            "properties": {
+                "amount":{
+                "type": "integer"
+                } ,
+                "pin":{
+                    "type": "string"
+                    }    
+            }
+        },
+        "Withdraw": {
+            "type": "object",
+            "properties": {
+                "amount":{
+                "type": "integer"
+                } ,
+                "pin":{
+                    "type": "string"
+                    }    
+            }
+        },
+        "History": {
+            "type": "object",
+            "properties": {
+                "amount":{
+                "type": "integer"
+                } ,
+                "pin":{
+                    "type": "string"
+                    }    
+            }
+        },
+    
+        
+        "Transaction": {
+            "type": "object",
+            "properties": {
+                "amount":{
+                "type": "integer"
+                } ,
+                "pin":{
+                    "type": "string"
+                    }    
+            }
+        },
+
+          "Id":{
+          "type" : "integer",
+          "properties" : {
+              "Id" : {
+                  "type" : "integer"
+              }
+          }
+      },
+          "update":{
+            "type": "object",
+            "properties" :{
+              "name": {
+                  "type": "string"
+                  },
+                "description": {
+                  "type": "string"
+                },
+                "completed": {
+                  "type": "boolean"
+                }
+            }
+          }
+      }
+  },
+
+  "paths": {
+    "/login": {
+        "post": {
+        "tags": [
+            "login to our bank API"
+        ],
+        "summary": "login customer",
+        "requestBody": {
+        "description": "login customer To Database",
+        "required": true,
+        "content": {
+            "application/json": {
+            "schema": {
+                "$ref": "#/components/schemas/Login"
+                }
+            }
+        }
+        },
+        "responses": {
+            "200": {
+                "description": "OK",
+                "schema": {
+                "$ref": "#/components/schemas/Login"
+                }
+            },
+            "404": {
+                "description": "NOT FOUND",
+                "schema": {
+                "$ref": "#/components/schemas/Login"
+                }
+        }
+    }
+        
+        }},
+
+        "/history": {
+            "get": {
+            "tags": [
+                "Transaction history in bank API"
+            ],
+            "summary": "Transaction history",
+            "requestBody": {
+            "description": " customer transaction history",
+            "required": true,
+            "content": {
+                "application/json": {
+                "schema": {
+                    "$ref": "#/components/schemas/History"
+                    }
+                }
+            }
+            },
+            "responses": {
+                "200": {
+                    "description": "OK",
+                    "schema": {
+                    "$ref": "#/components/schemas/History"
+                    }
+                },
+                "404": {
+                    "description": "NOT FOUND",
+                    "schema": {
+                    "$ref": "#/components/schemas/History"
+                    }
+            }
+        }
+            
+            }},
+    
+
+        "/withdraw": {
+            "post": {
+            "tags": [
+                "withdraw from our bank API"
+            ],
+            "summary": "login customer",
+            "requestBody": {
+            "description": "withdraw from your account",
+            "required": true,
+            "content": {
+                "application/json": {
+                "schema": {
+                    "$ref": "#/components/schemas/Withdraw"
+                    }
+                }
+            }
+            },
+            "responses": {
+                "200": {
+                    "description": "OK",
+                    "schema": {
+                    "$ref": "#/components/schemas/Withdraw"
+                    }
+                },
+                "404": {
+                    "description": "NOT FOUND",
+                    "schema": {
+                    "$ref": "#/components/schemas/Withdraw"
+                    }
+            }
+        }
+            
+            }},
+
+        "/deposite": {
+            "post": {
+            "tags": [
+                "deposit to our bank API"
+            ],
+            "summary": "Deposite money",
+            "requestBody": {
+            "description": "Customer can depositeTo Database",
+            "required": true,
+            "content": {
+                "application/json": {
+                "schema": {
+                    "$ref": "#/components/schemas/Deposite"
+                    }
+                }
+            }
+            },
+            "responses": {
+                "200": {
+                    "description": "OK",
+                    "schema": {
+                    "$ref": "#/components/schemas/Deposite"
+                    }
+                },
+                "404": {
+                    "description": "NOT FOUND",
+                    "schema": {
+                    "$ref": "#/components/schemas/Deposite"
+                    }
+            }
+        }
+            
+            }},
+
+
+        "/balance": {
+            "get": {
+            "tags": [
+                "Check your balance in our bank API"
+            ],
+            "summary": "Check your balance ",
+            "requestBody": {
+            "description": "Check customer balance in our Database",
+            "required": true,
+            "content": {
+                "application/json": {
+                "schema": {
+                    "$ref": "#/components/schemas/Balance"
+                    }
+                }
+            }
+            },
+            "responses": {
+                "200": {
+                    "description": "OK",
+                    "schema": {
+                    "$ref": "#/components/schemas/Balance"
+                    }
+                },
+                "404": {
+                    "description": "NOT FOUND",
+                    "schema": {
+                    "$ref": "#/components/schemas/Balance"
+                    }
+            }
+        }
+            
+            }},
+
+
+      "/register": {
+          "post": {
+          "tags": [
+              "Register to our bank API"
+          ],
+          "summary": "Add customer",
+          "requestBody": {
+          "description": "Post New customer To Database",
+          "required": true,
+          "content": {
+              "application/json": {
+              "schema": {
+                  "$ref": "#/components/schemas/Registration"
+                  }
+              }
+          }
+          },
+          "responses": {
+              "200": {
+                  "description": "OK",
+                  "schema": {
+                  "$ref": "#/components/schemas/Registration"
+                  }
+              },
+              "404": {
+                  "description": "NOT FOUND",
+                  "schema": {
+                  "$ref": "#/components/schemas/Registration"
+                  }
+          }
+          }
+          },
+
+          
+
+          "get" :{
+              "tags": [
+                  "Get All todos from API"
+              ],
+              "summary": "Get All todos",
+             
+              "responses": {
+              "200": {
+                  "description": "OK",
+                  "schema": {
+                  "$ref": "#/components/schemas/TodoList"
+                  }
+              },
+              "404": {
+                  "description": "NOT FOUND",
+                  "schema": {
+                  "$ref": "#/components/schemas/TodoList"
+                  }
+          }
+          }
+          }
+      },
+
+    
+      "/todolist/{id}":{
+
+          "get" :{
+              "tags": [
+                  "Get todos from API"
+              ],
+              "summary": "Get todos",
+              "parameters": [{
+                "name": "id",
+                "in": "path",
+                "description": "todo id to update",
+                "required": true,
+                "type": "integer",
+                "schema" : {
+                    "$ref": "#/components/schemas/Id"
+                }
+              }],
+             
+              "responses": {
+              "200": {
+                  "description": "OK",
+                  "schema": {
+                  "$ref": "#/components/schemas/TodoList"
+                  }
+              },
+              "404": {
+                  "description": "NOT FOUND",
+                  "schema": {
+                  "$ref": "#/components/schemas/TodoList"
+                  }
+          }
+          }
+          },
+         
+          "put": {
+          "tags": [
+              "Update todos on API"
+          ],
+          "parameters": [{
+              "name": "id",
+              "in": "path",
+              "description": "todo id to update",
+              "required": true,
+              "type": "integer",
+              "schema" : {
+                  "$ref": "#/components/schemas/Id"
+              }
+          }],
+          "summary": "Update Todo",
+          "requestBody": {
+          "description": "Update Existing todo On Database",
+          "required": true,
+          "content": {
+              "application/json": {
+                  "schema": {
+                      "$ref": "#/components/schemas/update"
+                  }
+              }
+          }
+          },
+          "responses": {
+              "200": {
+                  "description": "OK",
+                  "schema": {
+                  "$ref": "#/components/schemas/TodoList"
+                  }
+              },
+              "404": {
+                  "description": "NOT FOUND",
+                  "schema": {
+                  "$ref": "#/components/schemas/TodoList"
+                  }
+          }
+          }
+      },
+      "delete": {
+          "tags": [
+              "Delete todo to API"
+          ],
+          "parameters": [{
+              "name": "id",
+              "in": "path",
+              "description": "product id to delete",
+              "required": true,
+              "type": "integer",
+              "schema" : {
+                  "$ref": "#/components/schemas/Id"
+              }
+          }],
+          "summary": "Delete todo",
+          
+          "responses": {
+              "200": {
+                  "description": "OK",
+                  "schema": {
+                  "$ref": "#/components/schemas/TodoList"
+                  }
+              },
+              "404": {
+                  "description": "NOT FOUND",
+                  "schema": {
+                  "$ref": "#/components/schemas/TodoList"
+                  }
+          }
+          }
+      }
+    
+      
+      }
+
+
+
+
+      
+      
+
+    }
+
+
+    
+
+    
+    
+}
+
+

@@ -1,0 +1,95 @@
+openapi: 3.0.2
+info:
+  version: 1.0.0
+  title: Transact API
+  description: A simple transact API
+  termsOfService: https://swagger.io/terms/
+  contact:
+    name: API Support
+    url: http://www.swagger.io/support
+    email: support@swagger.io
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0.html
+paths:
+  /balance:
+    get:
+      security:
+        - apiKey: []
+      tags:
+        - balance
+      summary: Get balance 
+      description: Returns user balance
+      operationId: balance
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Balance'
+  /deposit:
+    post:
+      security:
+        - apiKey: []
+      tags:
+        - deposit
+      summary: Make a deposit
+      description: Make a deposit
+      operationId: deposit
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Deposit'
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: string
+  /withdraw:
+    post:
+      security:
+        - apiKey: []
+      tags:
+        - withdraw
+      summary: Make a withdraw
+      description: Make a withdraw
+      operationId: withdraw
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Withdraw'
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: string
+components:
+  schemas:
+    Balance:
+      type: object
+      properties:
+        user:
+          type: string
+    Deposit:
+      type: object
+      properties:
+        amount:
+          type: integer
+        pin:
+          type: string
+    Withdraw:
+      type: object
+      properties:
+        amount:
+          type: integer
+        pin:
+          type: string
